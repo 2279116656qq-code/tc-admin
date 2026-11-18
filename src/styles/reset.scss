@@ -1,0 +1,19 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; // 让 width 包含 padding 和 border，算宽度不烧脑
+}
+
+ul,
+ol {
+  list-style: none; // 去掉列表默认的小圆点
+}
+
+a {
+  text-decoration: none; // 去掉链接下划线
+  color: inherit; // 链接颜色跟随文字
+}
+
+img {
+  display: block; // 消除图片底部的诡异空隙
+}
