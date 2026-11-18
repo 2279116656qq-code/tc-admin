@@ -1,11 +1,13 @@
 import { createApp } from "vue";
 import App from "./App.vue";
 import { setupRouter } from "@/router";
+import { setupStore } from "@/store";
 import "@/styles/index.scss";
 
 function main() {
   const app = createApp(App);
-  setupRouter(app); // 装配路由（仿 chmc-web 的组装风格）
+  setupStore(app); // ← 新增：先装仓库
+  setupRouter(app);
   app.mount("#app");
 }
 

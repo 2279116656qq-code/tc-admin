@@ -10,7 +10,18 @@
     </aside>
     <!-- 右侧：顶栏 + 内容区 -->
     <div class="layout-right">
-      <header class="layout-header">顶栏</header>
+      <header class="layout-header">
+        <span>TC-Admin 管理系统</span>
+        <div class="header-right">
+          <!-- 已登录：显示用户名 + 退出 -->
+          <template v-if="userStore.token">
+            <span class="user-name">{{ userStore.userName }}</span>
+            <button @click="userStore.logout()">退出登录</button>
+          </template>
+          <!-- 未登录：模拟登录按钮 -->
+          <button v-else @click="userStore.login('李爽')">模拟登录</button>
+        </div>
+      </header>
       <main class="layout-content">
         <router-view />
         <!-- ★ 子页面在这里切换 -->
@@ -20,7 +31,10 @@
 </template>
 
 <script setup lang="ts">
-// 目前还没有逻辑，script 先空着
+import { useUserStore } from "@/store/modules/user";
+
+// 拿到仓库的引用——从此这个组件可以随意读写仓库
+const userStore = useUserStore();
 </script>
 
 <style scoped lang="scss">
@@ -77,7 +91,19 @@
   background: #fff;
   border-bottom: 1px solid $border-color;
 }
+.layout-header {
+  // ...原有样式保留，追加下面两行：
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 24px;
 
+  .user-name {
+    color: $primary-color;
+    font-weight: bold;
+    margin-right: 12px;
+  }
+}
 .layout-content {
   flex: 1;
   padding: 16px;
