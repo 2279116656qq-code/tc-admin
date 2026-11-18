@@ -92,7 +92,6 @@ const userStore = useUserStore();
   border-bottom: 1px solid $border-color;
 }
 .layout-header {
-  // ...原有样式保留，追加下面两行：
   display: flex;
   justify-content: space-between;
   align-items: center;
