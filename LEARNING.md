@@ -12,11 +12,13 @@
 ## 教学约定（重要）
 
 1. **AI 只讲解 + 给指令，学习者自己动手执行**（不代写不代跑，除非学习者明确说"这段你直接写"）
-2. 解释用大白话 + 生活类比（毛坯房/剧院银幕/海关等类比已被验证有效）
+2. 解释用大白话 + 生活类比（毛坯房/剧院银幕/海关等类比已被验证有效；注意：同一链路深挖时类比会失效，改用纯代码平铺走读）
 3. 每条命令要说明"这是在干什么、为什么"
 4. 报错时先教读报错（错误码 + 人话描述），再给解法
 5. 每完成一步提醒 git 三连：`git add . && git commit -m "feat: xxx" && git push`
 6. 学习者隔一段会问"这步干了什么"要回顾——用分层全景图 + 一句话复述
+7. **每完成一小节就实时更新本文件的进度（2026-11-19 用户要求：学习者会换电脑学习，档案必须与真实状态零时差，不等大步通关才更新）**
+8. 分工（2026-11-19 定）：后端（src/mock + docs/api.md）和样式（CSS/SCSS）由 AI 维护；学习者写功能代码（template 结构 + script 逻辑）
 
 ## 七步计划与进度
 
@@ -29,10 +31,11 @@
   - src/mock/：server.ts 引擎（规则匹配 + :id 占位符）+ user.ts（8条假数据 + 增删改查4规则）+ index.ts 汇总；vite.config.ts 里 mockApiPlugin 接线（configureServer 拦截 /api）
   - src/api/user.ts：getUserList/addUser/updateUser/deleteUser 四函数
   - .env.development：VITE_BASE_API=/api
-- ✅ 第6步：用户管理 CRUD 页面（2026-11-19 完成）
+- ✅ 第6步：用户管理 CRUD 页面（2026-11-19）
   - 6A：element-plus + unplugin-vue-components/unplugin-auto-import 按需引入（src/ 下自动生成 components.d.ts / auto-imports.d.ts 点名册，随仓库提交）；App.vue el-config-provider 配中文包（可三层展开定制措辞）
-  - 6B：表格+搜索+分页（数据驱动表格、"换条件回第1页"铁律、分页双 v-model、@current-change/@size-change 分工）
-  - 6C：删除确认（ElMessageBox.confirm 取消走 catch）、新增/编辑复用弹窗（editingId 模式开关、openEdit 回填）、FormRules 校验（required/pattern/trigger）、作用域插槽 row as UserItem 类型断言、request 拦截器 alert 换 ElMessage.error
+  - 6B：表格+搜索+分页（数据驱动表格、"换条件回第1页"铁律、分页双 v-model、@current-change/@size-change 分工）——已提交 "用户列表页(表格+搜索+分页)"
+  - 6C：删除确认（ElMessageBox.confirm 取消走 catch）、新增/编辑复用弹窗（editingId 模式开关、openEdit 回填）、FormRules 校验、作用域插槽 row as UserItem 类型断言——**代码已全部验证正确**；删除功能已单独提交 "feat: 用户删除功能"
+  - ⏳ 第6步收尾（下次开场先核对这些）：①删 user/index.vue 第4行占位语 ②request/index.ts 两处 alert → ElMessage.error + 破坏实验验证（url 改 /users2 看红色提示再改回）③ID 列换 type="index" 序号列（用户发现"新增后序号乱"——已讲 id=身份证号/序号=排队号的区分）④提交推送 "feat: 完成用户管理增删改查"
 
 ## 接口文档工作流（2026-11-19 起，学习者本人提出）
 

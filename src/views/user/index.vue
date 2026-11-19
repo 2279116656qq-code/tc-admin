@@ -17,7 +17,8 @@
 
     <!-- 数据表格：给 :data 一个数组，每列 prop 对应字段名 -->
     <el-table :data="list" border>
-      <el-table-column prop="id" label="ID" width="80" />
+      <el-table-column type="index" label="序号" width="80" />
+      <!-- <el-table-column prop="id" label="ID" width="80" /> -->
       <el-table-column prop="name" label="姓名" />
       <el-table-column prop="phone" label="手机号" />
       <el-table-column prop="role" label="角色" />
