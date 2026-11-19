@@ -44,3 +44,9 @@ service.interceptors.response.use(
 export function request<T = any>(config: AxiosRequestConfig): Promise<T> {
   return service(config) as Promise<T>;
 }
+
+/**
+ * axios 是前后端沟通的工具，内置负责“组装请求+发送+解析响应”；
+ * 而带 token 和剥壳拿业务数据，是我们自己写的两个拦截器加上的能力——这套组合
+ * 就叫“axios 封装”。
+ */
