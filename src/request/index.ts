@@ -29,13 +29,13 @@ service.interceptors.response.use(
     const res = response.data as ApiResponse;
     if (res.code !== 0) {
       // 失败：统一提示（第6步换成 Element Plus 的优雅提示）
-      alert(res.message || "请求出错");
+      ElMessage.error(res.message || "请求出错");
       return Promise.reject(new Error(res.message));
     }
     return res.data; // 成功：剥壳！调用方直接拿到业务数据
   },
   (error) => {
-    alert("网络异常，请稍后重试");
+    ElMessage.error("网络异常，请稍后重试");
     return Promise.reject(error);
   },
 );
