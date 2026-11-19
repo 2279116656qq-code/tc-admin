@@ -29,14 +29,21 @@ export function createMockMiddleware(routes: MockRoute[]): Connect.NextHandleFun
       for (const route of routes) {
         const params = matchPath(route.path, path)
         if (params && route.method === method) {
-          const data = route.handler({
-            params,
-            query: Object.fromEntries(new URLSearchParams(queryStr)),
-            body: body ? JSON.parse(body) : {}
-          })
           res.statusCode = 200
           res.setHeader('Content-Type', 'application/json')
-          res.end(JSON.stringify({ code: 0, message: 'ok', data }))
+          try {
+            // handler 正常 return → 成功响应
+            const data = route.handler({
+              params,
+              query: Object.fromEntries(new URLSearchParams(queryStr)),
+              body: body ? JSON.parse(body) : {}
+            })
+            res.end(JSON.stringify({ code: 0, message: 'ok', data }))
+          } catch (err) {
+            // handler 抛 Error → 失败响应（后端报业务错误的统一出口）
+            const message = err instanceof Error ? err.message : '服务异常'
+            res.end(JSON.stringify({ code: 1, message, data: null }))
+          }
           return
         }
       }

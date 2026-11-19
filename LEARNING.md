@@ -31,9 +31,19 @@
   - .env.development：VITE_BASE_API=/api
   - ⚠️ 若 git log 中无 "axios封装与mock假后端" 提交：先让学习者做三验证（Console 打印列表 / Network 看 Response 格式 / Request Headers 看 Authorization）再提交
 
+## 接口文档工作流（2026-11-19 起，学习者本人提出）
+
+- **后端（src/mock）和接口文档（docs/api.md）由 AI 负责维护**，学习者照文档开发前端（教学模式在后端部分豁免）
+- 学习者的计划：前端学完后，学 Node 时照同一份 docs/api.md 亲手实现真后端（合同不变，换实现方）
+- mock 引擎已升级：handler 抛 Error = 失败响应（code:1），正常 return = 成功（code:0）
+- 已有接口：GET/POST /api/users、PUT/DELETE /api/users/:id、POST /api/login（测试密码 123456，第7步接）
+
 ## 待教步骤
 
-- ⏳ 第6步：用户管理 CRUD 页面 —— 安装 element-plus，**顺带配 unplugin-vue-components 自动按需引入**；做列表/搜索/分页/新增编辑弹窗/删除确认（替换 views/user/index.vue 的测试代码）
+- 🔶 第6步：用户管理 CRUD 页面
+  - ✅ 6A：element-plus + unplugin 自动按需引入（src/ 下自动生成 components.d.ts / auto-imports.d.ts 点名册，要随仓库提交）
+  - ✅ 6B：表格+搜索+分页（commit "用户列表页(表格+搜索+分页)"）；App.vue 用 el-config-provider 配中文包（可三层展开定制措辞）
+  - ⏳ 6C：删除确认 → 新增/编辑弹窗 → alert 换 ElMessage
 - ⏳ 第7步：登录页 + src/permission.ts 路由守卫（未登录跳登录页、白名单）、user store 的 login 换成真弹窗表单、响应拦截器加"登录过期跳转登录页"（chmc-web 的 code 901 同款逻辑）
 - 加餐（7步学完后再说）：文件流下载、按状态码细分报错提示、svg 雪碧图、真·动态路由(addRoute)、多模块统一缓存清理
 
